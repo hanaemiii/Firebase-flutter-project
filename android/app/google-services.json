@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "348019294759",
+    "firebase_url": "https://test-delivery-app-b0952-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "test-delivery-app-b0952",
+    "storage_bucket": "test-delivery-app-b0952.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348019294759:android:556a9487d07db482da0402",
+        "android_client_info": {
+          "package_name": "com.example.testing_final_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmMemk37cwU_xqc3XRQIL0FKCp_7Zahss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
