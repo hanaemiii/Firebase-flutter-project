@@ -21,36 +21,49 @@ class _CategoriesTabState extends State<CategoriesTab> {
     _fetchDataFromFirestore();
   }
 
-  void _fetchDataFromFirestore() async {
-    try {
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection('categories')
-          .doc('unif1ODGW4AMArVIS5qq')
-          .get();
+ void _fetchDataFromFirestore() async {
+  try {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('categories')
+        .doc('unif1ODGW4AMArVIS5qq')
+        .get();
 
-      if (snapshot.exists) {
-        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+    if (snapshot.exists) {
+      Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
 
-        if (data != null && data.containsKey('itemList')) {
-          Map<String, dynamic> itemListData =
-              data['itemList'] as Map<String, dynamic>;
+      if (data != null && data.containsKey('itemList')) {
+        Map<String, dynamic> itemListData =
+            data['itemList'] as Map<String, dynamic>;
 
-          setState(() {
-            originalItems = Map<String, List<Map<String, dynamic>>>.from(
-              itemListData.map((key, value) => MapEntry(
-                  key,
-                  (value as List<dynamic>)
-                      .cast<Map<String, dynamic>>()
-                      .toList())),
-            );
-            items = Map<String, List<Map<String, dynamic>>>.from(originalItems);
-          });
-        }
+        Map<String, List<Map<String, dynamic>>> sortedItems =
+            Map<String, List<Map<String, dynamic>>>.from(
+          itemListData.map((key, value) {
+            if (value is List<dynamic>) {
+              List<Map<String, dynamic>> sortedList =
+                  value.cast<Map<String, dynamic>>().toList();
+
+              sortedList.sort((a, b) =>
+                  (a['itemName'] as String)
+                      .compareTo(b['itemName'] as String));
+
+              return MapEntry(key, sortedList);
+            }
+
+            return MapEntry(key, []);
+          }),
+        );
+
+        setState(() {
+          originalItems = sortedItems;
+          items = Map<String, List<Map<String, dynamic>>>.from(originalItems);
+        });
       }
-    } catch (e) {
-      print('Error fetching data from Firestore: $e');
     }
+  } catch (e) {
+    print('Error fetching data from Firestore: $e');
   }
+}
+
 
   void filterSearchResults(String query) {
     setState(() {

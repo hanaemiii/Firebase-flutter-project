@@ -24,6 +24,7 @@ class _ProductListState extends State<ProductList> {
   late Map<String, List<Map<String, dynamic>>> items;
   final TextEditingController _searchController = TextEditingController();
   late ShoppingCart shoppingCart;
+  List<String> selectedFilters = [];
 
   @override
   void initState() {
@@ -47,7 +48,24 @@ class _ProductListState extends State<ProductList> {
                 item['itemName'].toLowerCase().contains(query.toLowerCase()))
             .toList();
       });
+      applyFilters(selectedFilters); // Apply filters along with search results
       print("Filtered items: $items");
+    });
+  }
+
+  void applyFilters(List<String> filters) {
+    setState(() {
+      selectedFilters = filters;
+
+      // Apply filters to the items
+      items = Map.from(originalItems);
+      items.forEach((category, categoryItems) {
+        items[category] = categoryItems
+            .where((item) =>
+                selectedFilters.isEmpty ||
+                selectedFilters.contains(item['itemName'].toLowerCase()))
+            .toList();
+      });
     });
   }
 
@@ -60,7 +78,6 @@ class _ProductListState extends State<ProductList> {
         create: (context) => SelectedItemProvider(),
         child: buildBody(),
       ),
-      
     );
   }
 
@@ -118,6 +135,31 @@ class _ProductListState extends State<ProductList> {
                 CustomSearchBar.SearchBar(
                   controller: _searchController,
                   onSearch: filterSearchResults,
+                ),
+                // Filter chips for individual item names
+                Wrap(
+                  spacing: 8.0,
+                  children: items.values
+                      .expand((categoryItems) => categoryItems
+                          .map((item) => item['itemName'].toString()))
+                      .toSet()
+                      .toList()
+                      .map((itemName) {
+                    return FilterChip(
+                      label: Text(itemName),
+                      selected: selectedFilters.contains(itemName.toLowerCase()),
+                      onSelected: (bool selected) {
+                        setState(() {
+                          if (selected) {
+                            selectedFilters.add(itemName.toLowerCase());
+                          } else {
+                            selectedFilters.remove(itemName.toLowerCase());
+                          }
+                          applyFilters(selectedFilters);
+                        });
+                      },
+                    );
+                  }).toList(),
                 ),
                 Expanded(
                   child: ListView.builder(
