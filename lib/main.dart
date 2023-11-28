@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:testing_final_project/models/shopping_cart.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:testing_final_project/pages/credit_card_page.dart';
 
 
 void main() async {

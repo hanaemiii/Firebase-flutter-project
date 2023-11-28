@@ -41,7 +41,6 @@ dependencies:
   flutter_svg: ^2.0.5
 
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -95,6 +94,10 @@ flutter:
     - assets/images/home.svg
     - assets/images/photo_camera.svg
     - assets/images/Ellipse.svg
+    - assets/images/Ellipse.png
+    - assets/images/mc_symbol.png
+    - assets/images/Hint.png
+    - assets/images/mc_symbol 1.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

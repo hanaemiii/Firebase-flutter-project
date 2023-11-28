@@ -36,211 +36,249 @@ class _CreditCardPageState extends State<CreditCardPage> {
           ),
         ),
       ),
-      body: buildBody(),
-    );
-  }
-
-  Widget buildBody() {
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Credit / Debit card',
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: 'SF Pro Display',
-                height: 41 / 30,
-                letterSpacing: 0.41,
-                fontWeight: FontWeight.w700,
-                color: Color(0xff2d0c57),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFB993D6), Color(0xFF8CA6DB)],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(right: 20, left:20, bottom:60),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Credit / Debit card',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontFamily: 'SF Pro Display',
+                  height: 41 / 30,
+                  letterSpacing: 0.41,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xff2d0c57),
                 ),
-                borderRadius: BorderRadius.circular(8),
               ),
-              width: screenWidth,
-              height: 200,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Stack(
                 children: [
-                  if (cardNumberController.text.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        cardNumberController.text,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'SF Pro Display',
-                          fontSize: 26,
-                          fontWeight: FontWeight.w500,
-                          height: 30.908 / 26,
-                          letterSpacing: 2.283,
-                          shadows: [
-                            Shadow(
-                              offset: Offset(0, 0.7010492086410522),
-                              blurRadius: 3.0,
-                              color: Color.fromRGBO(77, 5, 169, 0.30),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  if (nameController.text.isNotEmpty ||
-                      cardExpirationController.text.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          if (nameController.text.isNotEmpty)
-                            Text(
-                              nameController.text.toUpperCase(),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'SF Pro Display',
-                                fontSize: 26,
-                                fontWeight: FontWeight.w500,
-                                height: 30.908 / 26,
-                                letterSpacing: 2.283,
-                                shadows: [
-                                  Shadow(
-                                    offset: Offset(0, 0.7010492086410522),
-                                    blurRadius: 3.0,
-                                    color: Color.fromRGBO(77, 5, 169, 0.30),
-                                  )
-                                ],
-                              ),
-                            ),
-                          if (cardExpirationController.text.isNotEmpty)
-                            Text(
-                              cardExpirationController.text,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'SF Pro Display',
-                                fontSize: 26,
-                                fontWeight: FontWeight.w500,
-                                height: 30.908 / 26,
-                                letterSpacing: 2.283,
-                                shadows: [
-                                  Shadow(
-                                    offset: Offset(0, 0.7010492086410522),
-                                    blurRadius: 3.0,
-                                    color: Color.fromRGBO(77, 5, 169, 0.30),
-                                  )
-                                ],
-                              ),
-                            ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    height: 220,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          Color(0xFFB993D6),
+                          Color(0xFF8CA6DB),
                         ],
                       ),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+      BoxShadow(
+                color: Color.fromRGBO(184, 148, 215, 0.35),
+        spreadRadius: 5,
+        blurRadius: 7,
+        // offset: Offset(0, 3),
+      ),
+    ],
                     ),
-                  if (cardCvcController.text.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Opacity(
-                        opacity: 0.0,
-                        child: Text(
-                          cardCvcController.text,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'SF Pro Display',
-                            fontSize: 26,
-                            fontWeight: FontWeight.w500,
-                            height: 30.908 / 26,
-                            letterSpacing: 2.283,
-                            shadows: [
-                              Shadow(
-                                offset: Offset(0, 0.7010492086410522),
-                                blurRadius: 3.0,
-                                color: Color.fromRGBO(77, 5, 169, 0.30),
-                              )
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Image.asset(
+                      'assets/images/Ellipse.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.topRight,
+                        padding: EdgeInsets.all(25),
+                        child: Image.asset(
+                          'assets/images/mc_symbol.png',
+                        ),
+                      ),
+                      if (cardNumberController.text.isEmpty)
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text(''),
+                        ),
+                      if (cardNumberController.text.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text(
+                            cardNumberController.text,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'SF Pro Display',
+                              fontSize: 26,
+                              fontWeight: FontWeight.w500,
+                              height: 30.908 / 26,
+                              letterSpacing: 2.283,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(0, 0.7010492086410522),
+                                  blurRadius: 3.0,
+                                  color: Color.fromRGBO(77, 5, 169, 0.30),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      if (nameController.text.isNotEmpty ||
+                          cardExpirationController.text.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (nameController.text.isEmpty) Text(''),
+                              if (nameController.text.isNotEmpty)
+                                Text(
+                                  nameController.text.toUpperCase(),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'SF Pro Display',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    height: 30.908 / 26,
+                                    letterSpacing: 2.283,
+                                    shadows: [
+                                      Shadow(
+                                        offset: Offset(0, 0.7010492086410522),
+                                        blurRadius: 3.0,
+                                        color: Color.fromRGBO(77, 5, 169, 0.30),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              if (cardExpirationController.text.isNotEmpty)
+                                Text(
+                                  cardExpirationController.text,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'SF Pro Display',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    height: 30.908 / 26,
+                                    letterSpacing: 2.283,
+                                    shadows: [
+                                      Shadow(
+                                        offset: Offset(0, 0.7010492086410522),
+                                        blurRadius: 3.0,
+                                        color: Color.fromRGBO(77, 5, 169, 0.30),
+                                      )
+                                    ],
+                                  ),
+                                ),
                             ],
                           ),
                         ),
-                      ),
-                    ),
+                      if (cardCvcController.text.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Opacity(
+                            opacity: 0.0,
+                            child: Text(
+                              cardCvcController.text,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'SF Pro Display',
+                                fontSize: 26,
+                                fontWeight: FontWeight.w500,
+                                height: 30.908 / 26,
+                                letterSpacing: 2.283,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(0, 0.7010492086410522),
+                                    blurRadius: 3.0,
+                                    color: Color.fromRGBO(77, 5, 169, 0.30),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ],
               ),
-            ),
-            Center(
-              child: SvgPicture.asset(
-                'assets/images/photo_camera.svg',
-              ),
-            ),
-            buildTextFieldColumn(
-              'Name on card',
-              'JOHN SMITH',
-              screenWidth,
-              controller: nameController,
-              displayController: nameController,
-              type: TextInputType.text,
-            ),
-            SizedBox(height: screenWidth * 0.03),
-            buildTextFieldColumn(
-              'Card number',
-              'XXXX XXXX XXXX XXXX',
-              screenWidth,
-              controller: cardNumberController,
-              displayController: cardNumberController,
-              type: TextInputType.number,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: buildTextFieldColumn(
-                    'Expiry date',
-                    'MM/YY',
-                    screenWidth / 2,
-                    controller: cardExpirationController,
-                    displayController: cardExpirationController,
-                    type: TextInputType.number,
-                    maxLength: 4,
-                  ),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: buildTextFieldColumn(
-                    'CVC',
-                    '123',
-                    screenWidth / 2,
-                    controller: cardCvcController,
-                    displayController: cardCvcController,
-                    type: TextInputType.number,
-                    maxLength: 3,
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              width: screenWidth,
-              height: screenWidth * 0.14,
-              decoration: BoxDecoration(
-                color: Color(0xff0acf83),
-                borderRadius: BorderRadius.circular(screenWidth * 0.02),
-              ),
-              child: Center(
-                child: Text(
-                  'USE THIS CARD',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: screenWidth * 0.04,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xffffffff),
-                  ),
+              Center(
+                child: SvgPicture.asset(
+                  'assets/images/photo_camera.svg',
                 ),
               ),
-            ),
-          ],
+              buildTextFieldColumn(
+                'Name on card',
+                'JOHN SMITH',
+                MediaQuery.of(context).size.width,
+                controller: nameController,
+                displayController: nameController,
+                type: TextInputType.text,
+                maxLength: 24,
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
+              buildTextFieldColumn(
+                'Card number',
+                'XXXX XXXX XXXX XXXX',
+                MediaQuery.of(context).size.width,
+                controller: cardNumberController,
+                displayController: cardNumberController,
+                type: TextInputType.number,
+                maxLength: 19,
+                    suffixIcon: Image.asset('assets/images/mc_symbol 1.png'),
+
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: buildTextFieldColumn(
+                      'Expiry date',
+                      'MM/YY',
+                      MediaQuery.of(context).size.width / 2,
+                      controller: cardExpirationController,
+                      displayController: cardExpirationController,
+                      type: TextInputType.number,
+                      maxLength: 5,
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Expanded(
+                    child: buildTextFieldColumn(
+                      'CVC',
+                      '123',
+                      MediaQuery.of(context).size.width / 2,
+                      controller: cardCvcController,
+                      displayController: cardCvcController,
+                      type: TextInputType.number,
+                      maxLength: 3,
+    suffixIcon: Image.asset('assets/images/Hint.png'),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width * 0.14,
+                decoration: BoxDecoration(
+                  color: Color(0xff0acf83),
+                  borderRadius: BorderRadius.circular(
+                      MediaQuery.of(context).size.width * 0.02),
+                ),
+                child: Center(
+                  child: Text(
+                    'USE THIS CARD',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xffffffff),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -248,19 +286,24 @@ class _CreditCardPageState extends State<CreditCardPage> {
 
   Widget buildTextFieldColumn(String label, String hint, double? width,
       {required TextEditingController controller,
-      required TextEditingController displayController,
-      required type,
-      int? maxLength}) {
+        required TextEditingController displayController,
+        required type,
+        int? maxLength,
+        Widget? suffixIcon}) {
     double screenWidth = MediaQuery.of(context).size.width;
 
     List<TextInputFormatter> inputFormatters = [];
 
     if (label == 'Name on card') {
       inputFormatters.add(FilteringTextInputFormatter.singleLineFormatter);
-      inputFormatters.add(UpperCaseTextFormatter());
+    }
+    if (label == 'Card number') {
+      inputFormatters.add(CardNumberFormatter());
     }
 
-    if (label == 'Expiry date' || label == 'CVC') {
+    if (label == 'Expiry date') {
+      inputFormatters.add(ExpiryDateFormatter());
+    } else if (label == 'CVC') {
       inputFormatters.add(FilteringTextInputFormatter.digitsOnly);
     }
 
@@ -300,13 +343,14 @@ class _CreditCardPageState extends State<CreditCardPage> {
               inputFormatters: inputFormatters,
               onChanged: (text) {
                 displayController.text = text;
+                setState(() {});
               },
               decoration: InputDecoration(
-                hintText: '',
+                hintText: hint,
                 hintStyle: TextStyle(
-                  height: 0,
+                  height: 2,
                   fontFamily: "SF Pro Text",
-                  fontSize: 0,
+                  fontSize: 14,
                   letterSpacing: 0,
                   fontWeight: FontWeight.w400,
                   color: Color(0xFF9586A8),
@@ -318,6 +362,8 @@ class _CreditCardPageState extends State<CreditCardPage> {
                   screenWidth * 0.05,
                   screenWidth * 0.02,
                 ),
+                counterText: "",
+                suffixIcon: suffixIcon, 
               ),
             ),
           ),
@@ -327,13 +373,39 @@ class _CreditCardPageState extends State<CreditCardPage> {
   }
 }
 
-class UpperCaseTextFormatter extends TextInputFormatter {
+class ExpiryDateFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
+    String formattedText = newValue.text;
+
+    if (formattedText.length == 2 && newValue.selection.baseOffset == 2) {
+      formattedText += '/';
+    }
+
     return TextEditingValue(
-      text: newValue.text != null ? newValue.text!.toUpperCase() : '',
-      selection: newValue.selection,
+      text: formattedText,
+      selection: TextSelection.collapsed(offset: formattedText.length),
     );
+  }
+}
+
+class CardNumberFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    String formattedText = newValue.text.replaceAll(RegExp(r'\D'), '');
+
+    StringBuffer buffer = StringBuffer();
+    for (int i = 0; i < formattedText.length; i++) {
+      buffer.write(formattedText[i]);
+      int index = i + 1;
+      if (index % 4 == 0 && formattedText.length != index) {
+        buffer.write(" ");
+      }
+    }
+
+    return TextEditingValue(
+        text: buffer.toString(), selection: TextSelection.collapsed(offset: buffer.length));
   }
 }
